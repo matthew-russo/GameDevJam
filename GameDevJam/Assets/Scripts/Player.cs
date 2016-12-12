@@ -1,12 +1,17 @@
  using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
+public class Boundary
+{
+    public float xMin, xMax, yMin, yMax;
+} 
+
 public class Player : MonoBehaviour
 {
-
-    private float speed;
     private Rigidbody2D body;
-
+    private bool started = false;
+    
     // Use this for initialization
     void Start()
     {
@@ -16,42 +21,23 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        move();
+        jump();
     }
 
-    public void move()
-    {
-        run();
-        jump();      
-    }
-
-    public void jump()
+    private void jump()
     {
         float moveVertical = Input.GetAxis("Vertical");
-        Vector3 movement = new Vector3(0, moveVertical, 0);
 
-        if (moveVertical != 0)
+        Rigidbody2D body = GetComponent<Rigidbody2D>();
+
+        if (moveVertical > 0)
         {
-            speed = 10f;
+            started = true;
+            body.gravityScale = 0.5f;
+            body.position = new Vector3(body.position.x, body.position.y + 0.15f, 0);            
         }
 
-        else speed = 0;
-
-        body.velocity = movement * speed;
+        else if (started) body.gravityScale = 1.5f;
     }
 
-    public void run()
-    {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        Vector3 movement = new Vector3(moveHorizontal, 0, 0);
-
-        if (moveHorizontal != 0)
-        {
-            speed = 3;
-        }
-
-        else speed = 0;
-
-        body.velocity = movement * speed;
-    }
 }
