@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CloudSpawner : MonoBehaviour {
     public GameObject[] clouds = new GameObject[3];
-    private Vector3[] spawnPos = new Vector3[3];
+    private Vector3 spawnPos;
     private Quaternion spawnRot;
     private float spawnTime;
 
@@ -11,11 +11,7 @@ public class CloudSpawner : MonoBehaviour {
     void Start()
     {
         spawnTime = 6f;
-        clouds = GameObject.FindGameObjectsWithTag("cloud");
-        for (int i = 0; i<clouds.Length; i++)
-        {
-            spawnPos[i] = clouds[i].transform.position;
-        }
+        spawnPos = new Vector3(transform.position.x + Random.Range(-2f, 2f), transform.position.y + Random.Range(-2f, 2f), transform.position.z);
         spawnRot = Quaternion.identity;
     }
 
@@ -25,8 +21,9 @@ public class CloudSpawner : MonoBehaviour {
         spawnTime -= Time.deltaTime;
         if (spawnTime < 0)
         {
-            spawnTime = 6f;
-            Instantiate(clouds[Random.Range(0,2)], spawnPos[Random.Range(0, 2)], spawnRot);
+            spawnPos = new Vector3(transform.position.x + Random.Range(-2f, 2f), transform.position.y + Random.Range(-2f, 2f), transform.position.z);
+            spawnTime = Random.Range(2f,6f);
+            Instantiate(clouds[Random.Range(0,2)], spawnPos, spawnRot);
         }
     }
 }
