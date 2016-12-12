@@ -12,12 +12,12 @@ public class BuildingSpawner : MonoBehaviour {
 
     private GameObject ObstacleSpawn;
     public GameObject obstPrefab;
-    private Transform[] Spots = new Transform[6];
+    private Transform[] Spots = new Transform[5];
     private int spot;
 
     // Use this for initialization
     void Start () {
-        spawnTime = 2f;
+        spawnTime = 0f;
         spawnPos = transform.position;
         spawnRot = transform.rotation;
         
@@ -29,17 +29,22 @@ public class BuildingSpawner : MonoBehaviour {
         spawnTime -= Time.deltaTime;
         if (spawnTime < 0)
         {
-            spawnTime = 2f;
+            spawnTime = 1.5f;
             spawn = Instantiate(prefab, spawnPos, spawnRot) as GameObject;
             spawn.transform.SetParent(this.transform);
             Spots = spawn.GetComponentsInChildren<Transform>();
+            for (int i =0; i < Spots.Length; i++)
+            {
+                Debug.Log(i);
+                Debug.Log(Spots[i]);
+            }
             SpawnObstacle();
         }
 	}
 
     private void SpawnObstacle()
     {
-        spot = (int)Mathf.Round(Random.Range(1f,Spots.Length));
+        spot = (int)Mathf.Round(Random.Range(1f,5f));
         Debug.Log(spot);
         ObstacleSpawn = Instantiate(obstPrefab, Spots[spot].position, spawnRot) as GameObject;
         ObstacleSpawn.transform.SetParent(Spots[spot]);
