@@ -13,9 +13,11 @@ public class RemoveBuildings : MonoBehaviour {
 	
 	}
 
-    void OnCollisionEnter2D()
+    void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("hit");
-        Destroy(this.gameObject);
+        if (col.gameObject.tag == "destroy")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
