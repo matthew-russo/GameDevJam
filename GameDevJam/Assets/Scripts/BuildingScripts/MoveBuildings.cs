@@ -7,7 +7,7 @@ public class MoveBuildings : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        movement = new Vector3(-.05f, 0f, 0f);
+        movement = new Vector3(-.1f, 0f, 0f);
 	}
 	
 	// Update is called once per frame

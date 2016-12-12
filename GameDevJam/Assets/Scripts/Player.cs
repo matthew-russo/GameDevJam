@@ -16,42 +16,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        move();
-    }
-
-    public void move()
-    {
-        run();
-        jump();      
-    }
-
-    public void jump()
-    {
-        float moveVertical = Input.GetAxis("Vertical");
-        Vector3 movement = new Vector3(0, moveVertical, 0);
-
-        if (moveVertical != 0)
+        if (Input.GetButtonDown("Jump"))
         {
-            speed = 10f;
+            Jump();
         }
-
-        else speed = 0;
-
-        body.velocity = movement * speed;
+        transform.rotation = Quaternion.identity;
     }
 
-    public void run()
+    private void Jump()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        Vector3 movement = new Vector3(moveHorizontal, 0, 0);
-
-        if (moveHorizontal != 0)
-        {
-            speed = 3;
-        }
-
-        else speed = 0;
-
-        body.velocity = movement * speed;
+        body.AddForce(new Vector2(0f, 325f),ForceMode2D.Impulse);
     }
 }
