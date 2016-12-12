@@ -4,13 +4,14 @@ using System.Collections;
 public class BuildingSpawner : MonoBehaviour {
 
     public GameObject prefab;
+    private GameObject spawn;
     private Vector3 spawnPos;
     private Quaternion spawnRot;
     private float spawnTime;
 
 	// Use this for initialization
 	void Start () {
-        spawnTime = 2f;
+        spawnTime = 3f;
         spawnPos = transform.position;
         spawnRot = transform.rotation;
 	}
@@ -20,8 +21,9 @@ public class BuildingSpawner : MonoBehaviour {
         spawnTime -= Time.deltaTime;
         if (spawnTime < 0)
         {
-            spawnTime = 2f;
-            Instantiate(prefab, spawnPos, spawnRot);
+            spawnTime = 3f;
+            spawn = Instantiate(prefab, spawnPos, spawnRot) as GameObject;
+            spawn.transform.SetParent(this.transform);
         }
 	}
 }
