@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     private int jumpCount;
     public int maxJumps;
     private Vector3 previousVelocity;
+    private ParticleSystem _particleSystem;
+
 
     // Use this for initialization
     private void Start()
@@ -16,6 +18,8 @@ public class Player : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         jumpCount = 0;
         maxJumps = 2;
+        _particleSystem = GetComponentInChildren<ParticleSystem>();
+
     }
 
     // Update is called once per frame
@@ -63,6 +67,7 @@ public class Player : MonoBehaviour
     {
         if (col.gameObject.tag == "building")
         {
+            _particleSystem.Play();
             jumpCount = 0;
         }
     }
