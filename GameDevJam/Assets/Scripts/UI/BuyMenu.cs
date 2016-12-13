@@ -15,6 +15,7 @@ public class BuyMenu : MonoBehaviour {
 
     public GameObject[] Texts;
     public GameObject[] Images;
+    public GameObject[] Buttons;
     private Text[] _texts = new Text[3];
 
 
@@ -51,6 +52,7 @@ public class BuyMenu : MonoBehaviour {
             ChangeSpeed();
             _texts[0].text = "PURCHASED!";
             Destroy(Images[0]);
+            Buttons[0].GetComponent<Button>().interactable = false;
         }
     }
 
@@ -62,6 +64,7 @@ public class BuyMenu : MonoBehaviour {
             ChangeCoinSpawn();
             _texts[1].text = "PURCHASED!";
             Destroy(Images[1]);
+            Buttons[1].GetComponent<Button>().interactable = false;
         }
     }
 
@@ -73,6 +76,7 @@ public class BuyMenu : MonoBehaviour {
             AddJump();
             _texts[2].text = "PURCHASED!";
             Destroy(Images[2]);
+            Buttons[2].GetComponent<Button>().interactable = false;
         }
     }
 
