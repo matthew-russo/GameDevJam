@@ -8,17 +8,22 @@ public class Player : MonoBehaviour
     private Rigidbody2D body;
     private int jumpCount;
     public int maxJumps;
+    private Vector3 previousVelocity;
+    private ParticleSystem _particleSystem;
+
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         body = GetComponent<Rigidbody2D>();
         jumpCount = 0;
         maxJumps = 2;
+        _particleSystem = GetComponentInChildren<ParticleSystem>();
+
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (!GlobalPause.Instance.isPaused)
         {
@@ -34,14 +39,17 @@ public class Player : MonoBehaviour
             {
                 Slam();
             }
-            transform.rotation = Quaternion.identity;
+            
+            body.position = new Vector3(body.position.x, Mathf.Clamp(transform.position.y, -5, 5.41f), 0);
         }
         if (GlobalPause.Instance.isPaused)
         {
             body.isKinematic = true;
+            previousVelocity = body.velocity;
+            body.velocity = new Vector3(0f,0f,0f);
         }
 
-        body.position = new Vector3(body.position.x, Mathf.Clamp(transform.position.y, -5, 5.41f), 0);      
+        transform.rotation = Quaternion.identity;
     }
 
     private void Jump()
@@ -55,10 +63,11 @@ public class Player : MonoBehaviour
         body.AddForce(new Vector2(0f, -400f), ForceMode2D.Impulse);
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "building")
         {
+            _particleSystem.Play();
             jumpCount = 0;
         }
     }
