@@ -7,32 +7,50 @@ public class Player : MonoBehaviour
     private float speed;
     private Rigidbody2D body;
     private int jumpCount;
+    public int maxJumps;
 
     // Use this for initialization
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         jumpCount = 0;
+        maxJumps = 2;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (!GlobalPause.Instance.isPaused)
         {
-            if (jumpCount < 2)
+            body.isKinematic = false;
+            if (Input.GetButtonDown("Jump"))
             {
-                Jump();
+                if (jumpCount < maxJumps)
+                {
+                    Jump();
+                }
             }
+            if (Input.GetButtonDown("Slam"))
+            {
+                Slam();
+            }
+            transform.rotation = Quaternion.identity;
         }
-        transform.rotation = Quaternion.identity;
-        body.position = new Vector3(body.position.x, Mathf.Clamp(body.position.y, -5, 5.41f), 0.0f);
+        if (GlobalPause.Instance.isPaused)
+        {
+            body.isKinematic = true;
+        }
     }
 
     private void Jump()
     {
-        body.AddForce(new Vector2(0f, 300f),ForceMode2D.Impulse);
-        jumpCount++;        
+        body.AddForce(new Vector2(0f, 275f),ForceMode2D.Impulse);
+        jumpCount++;
+    }
+
+    private void Slam()
+    {
+        body.AddForce(new Vector2(0f, -400f), ForceMode2D.Impulse);
     }
 
     void OnCollisionEnter2D(Collision2D col)

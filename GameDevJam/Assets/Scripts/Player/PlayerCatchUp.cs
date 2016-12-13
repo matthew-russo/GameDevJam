@@ -14,10 +14,12 @@ public class PlayerCatchUp : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-	   
-        if (transform.position.x >= desiredPos)
+        if (!GlobalPause.Instance.isPaused)
         {
-            transform.position = new Vector3(desiredPos, transform.position.y, transform.position.z);
+            if (transform.position.x >= desiredPos)
+            {
+                transform.position = new Vector3(desiredPos, transform.position.y, transform.position.z);
+            }
         }
     }
 
