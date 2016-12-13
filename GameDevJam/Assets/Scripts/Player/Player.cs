@@ -40,6 +40,8 @@ public class Player : MonoBehaviour
         {
             body.isKinematic = true;
         }
+
+        body.position = new Vector3(body.position.x, Mathf.Clamp(transform.position.y, -5, 5.41f), 0);      
     }
 
     private void Jump()

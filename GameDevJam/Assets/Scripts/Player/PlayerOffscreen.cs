@@ -21,12 +21,11 @@ public class PlayerOffscreen : MonoBehaviour {
         if (offscreen == true)
         {
             gameOver();
-        }
+        }        
 	}
 
     private void gameOver()
     {
-        //Time.timeScale = 0;
         SceneManager.LoadScene("End");
     }
 }
