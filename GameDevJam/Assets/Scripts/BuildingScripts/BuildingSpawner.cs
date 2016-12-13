@@ -12,12 +12,12 @@ public class BuildingSpawner : MonoBehaviour {
 
     private GameObject ObstacleSpawn;
     public GameObject obstPrefab;
-    private Transform[] Spots = new Transform[6];
+    private Transform[] Spots = new Transform[5];
     private int spot;
 
     // Use this for initialization
     void Start () {
-        spawnTime = 2f;
+        spawnTime = 0f;
         spawnPos = transform.position;
         spawnRot = transform.rotation;
         
@@ -26,21 +26,24 @@ public class BuildingSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        spawnTime -= Time.deltaTime;
-        if (spawnTime < 0)
+        if (!GlobalPause.Instance.isPaused)
         {
-            spawnTime = 2f;
-            spawn = Instantiate(prefab, spawnPos, spawnRot) as GameObject;
-            spawn.transform.SetParent(this.transform);
-            Spots = spawn.GetComponentsInChildren<Transform>();
-            SpawnObstacle();
+            spawnTime -= Time.deltaTime;
+            if (spawnTime < 0)
+            {
+                spawnTime = 1.5f;
+                spawn = Instantiate(prefab, spawnPos, spawnRot) as GameObject;
+                spawn.transform.SetParent(this.transform);
+                Spots = spawn.GetComponentsInChildren<Transform>();
+                SpawnObstacle();
+            }
         }
+        
 	}
 
     private void SpawnObstacle()
     {
-        spot = (int)Mathf.Round(Random.Range(1f,Spots.Length));
-        Debug.Log(spot);
+        spot = (int)Mathf.Round(Random.Range(1f,5f));
         ObstacleSpawn = Instantiate(obstPrefab, Spots[spot].position, spawnRot) as GameObject;
         ObstacleSpawn.transform.SetParent(Spots[spot]);
         ObstacleSpawn.transform.localScale = new Vector3(1f, 1f, 1f);
