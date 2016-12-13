@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class BuyMenu : MonoBehaviour {
 
@@ -12,17 +13,25 @@ public class BuyMenu : MonoBehaviour {
     private CoinSpawner _coinSpawnerScript;
 
 
-	// Use this for initialization
-	void Start () {
+    public GameObject[] Texts;
+    public GameObject[] Images;
+    private Text[] _texts = new Text[3];
+
+
+    // Use this for initialization
+    private void Start () {
         menu.SetActive(false);
         _playerScript = playerObject.GetComponent<Player>();
         _coinSpawnerScript = coinSpawnerObject.GetComponent<CoinSpawner>();
-    
+        for (int i = 0; i < Texts.Length; i++)
+        {
+            _texts[i] = Texts[i].GetComponent<Text>();
+        }
 
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (GlobalPause.Instance.isPaused)
         {
@@ -40,6 +49,8 @@ public class BuyMenu : MonoBehaviour {
         {
             CollectCoins.Instance.coinCount -= 3;
             ChangeSpeed();
+            _texts[0].text = "PURCHASED!";
+            Destroy(Images[0]);
         }
     }
 
@@ -49,6 +60,8 @@ public class BuyMenu : MonoBehaviour {
         {
             CollectCoins.Instance.coinCount -= 5;
             ChangeCoinSpawn();
+            _texts[1].text = "PURCHASED!";
+            Destroy(Images[1]);
         }
     }
 
@@ -58,6 +71,8 @@ public class BuyMenu : MonoBehaviour {
         {
             CollectCoins.Instance.coinCount -= 10;
             AddJump();
+            _texts[2].text = "PURCHASED!";
+            Destroy(Images[2]);
         }
     }
 
