@@ -26,12 +26,13 @@ public class Player : MonoBehaviour
             }
         }
         transform.rotation = Quaternion.identity;
+        body.position = new Vector3(body.position.x, Mathf.Clamp(body.position.y, -5, 5.41f), 0.0f);
     }
 
     private void Jump()
     {
         body.AddForce(new Vector2(0f, 300f),ForceMode2D.Impulse);
-        jumpCount++;
+        jumpCount++;        
     }
 
     void OnCollisionEnter2D(Collision2D col)

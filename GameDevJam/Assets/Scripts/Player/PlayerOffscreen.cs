@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerOffscreen : MonoBehaviour {
 
@@ -25,6 +26,7 @@ public class PlayerOffscreen : MonoBehaviour {
 
     private void gameOver()
     {
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
+        SceneManager.LoadScene("End");
     }
 }
