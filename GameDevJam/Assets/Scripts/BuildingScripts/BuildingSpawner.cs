@@ -26,26 +26,24 @@ public class BuildingSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        spawnTime -= Time.deltaTime;
-        if (spawnTime < 0)
+        if (!GlobalPause.Instance.isPaused)
         {
-            spawnTime = 1.5f;
-            spawn = Instantiate(prefab, spawnPos, spawnRot) as GameObject;
-            spawn.transform.SetParent(this.transform);
-            Spots = spawn.GetComponentsInChildren<Transform>();
-            for (int i =0; i < Spots.Length; i++)
+            spawnTime -= Time.deltaTime;
+            if (spawnTime < 0)
             {
-                Debug.Log(i);
-                Debug.Log(Spots[i]);
+                spawnTime = 1.5f;
+                spawn = Instantiate(prefab, spawnPos, spawnRot) as GameObject;
+                spawn.transform.SetParent(this.transform);
+                Spots = spawn.GetComponentsInChildren<Transform>();
+                SpawnObstacle();
             }
-            SpawnObstacle();
         }
+        
 	}
 
     private void SpawnObstacle()
     {
         spot = (int)Mathf.Round(Random.Range(1f,5f));
-        Debug.Log(spot);
         ObstacleSpawn = Instantiate(obstPrefab, Spots[spot].position, spawnRot) as GameObject;
         ObstacleSpawn.transform.SetParent(Spots[spot]);
         ObstacleSpawn.transform.localScale = new Vector3(1f, 1f, 1f);
