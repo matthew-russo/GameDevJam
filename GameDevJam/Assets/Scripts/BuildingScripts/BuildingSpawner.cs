@@ -32,8 +32,9 @@ public class BuildingSpawner : MonoBehaviour {
             if (spawnTime < 0)
             {
                 spawnTime = Random.Range(1.0f, 2.0f);
-                spawn = Instantiate(prefab, spawnPos, spawnRot) as GameObject;
+                spawn = Instantiate(prefab, new Vector3(spawnPos.x,spawnPos.y + Random.Range(-2.5f,-.5f)), spawnRot) as GameObject;
                 spawn.transform.SetParent(this.transform);
+                spawn.transform.localScale = new Vector3(spawn.transform.localScale.x + Random.Range(0f, 1.5f), spawn.transform.localScale.y, spawn.transform.localScale.z);
                 Spots = spawn.GetComponentsInChildren<Transform>();
                 SpawnObstacle();
             }
@@ -46,6 +47,6 @@ public class BuildingSpawner : MonoBehaviour {
         spot = (int)Mathf.Round(Random.Range(1f,5f));
         ObstacleSpawn = Instantiate(obstPrefab, Spots[spot].position, spawnRot) as GameObject;
         ObstacleSpawn.transform.SetParent(Spots[spot]);
-        ObstacleSpawn.transform.localScale = new Vector3(1f, 1f, 1f);
+        ObstacleSpawn.transform.localScale = new Vector3(1f, .5f, 1f);
     }
 }
