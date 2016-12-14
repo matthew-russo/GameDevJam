@@ -31,6 +31,7 @@ public class BuildingSpawner : MonoBehaviour {
             spawnTime -= Time.deltaTime;
             if (spawnTime < 0)
             {
+
                 spawnTime = Random.Range(1.2f, 1.6f);
                 spawn = Instantiate(prefab, new Vector3(spawnPos.x,spawnPos.y + Random.Range(-3.5f,-1.5f)), spawnRot) as GameObject;
                 spawn.transform.SetParent(this.transform);
