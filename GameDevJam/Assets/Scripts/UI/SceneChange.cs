@@ -31,4 +31,15 @@ public class SceneChange : MonoBehaviour {
     { 
         SceneManager.LoadScene("End");
     }
+
+    public void resetHighscore()
+    {
+        PlayerPrefs.SetFloat("HighScore", 0);
+        PlayerPrefs.SetFloat("HighScore2", 0);
+        PlayerPrefs.SetFloat("HighScore3", 0);
+        PlayerPrefs.SetFloat("HighScore4", 0);
+        PlayerPrefs.SetFloat("HighScore5", 0);
+
+        SceneManager.LoadScene("Highscores");
+    }
 }
