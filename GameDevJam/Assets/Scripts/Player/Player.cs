@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
                 Slam();
             }
             
-            body.position = new Vector3(body.position.x, Mathf.Clamp(transform.position.y, -5, 5.41f), 0);
+            //body.position = new Vector3(body.position.x, Mathf.Clamp(transform.position.y, -5, 5.41f), 0);
         }
         if (GlobalPause.Instance.isPaused)
         {
