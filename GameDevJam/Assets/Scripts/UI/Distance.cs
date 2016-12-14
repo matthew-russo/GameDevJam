@@ -16,8 +16,10 @@ public class Distance : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        newDistance = (Time.deltaTime * 5f);
-        distanceTotal += newDistance;
+	    if (!GlobalPause.Instance.isPaused){
+	        newDistance = (Time.deltaTime*5f);
+            distanceTotal += newDistance;
+        }
         DistanceUIText.text = "Distance : " + Mathf.Round(distanceTotal);
 	}
 }
