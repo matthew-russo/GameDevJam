@@ -48,6 +48,6 @@ public class BuildingSpawner : MonoBehaviour {
         spot = (int)Mathf.Round(Random.Range(1f,5f));
         ObstacleSpawn = Instantiate(obstPrefab, Spots[spot].position, spawnRot) as GameObject;
         ObstacleSpawn.transform.SetParent(Spots[spot]);
-        ObstacleSpawn.transform.localScale = new Vector3(1f, .5f, 1f);
+        ObstacleSpawn.transform.localScale = new Vector3(3f, 1.5f, 1f);
     }
 }
