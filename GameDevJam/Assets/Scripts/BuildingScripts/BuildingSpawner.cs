@@ -32,7 +32,7 @@ public class BuildingSpawner : MonoBehaviour {
             if (spawnTime < 0)
             {
                 spawnTime = Random.Range(1.0f, 2.0f);
-                spawn = Instantiate(prefab, new Vector3(spawnPos.x,spawnPos.y + Random.Range(-2.5f,-.5f)), spawnRot) as GameObject;
+                spawn = Instantiate(prefab, new Vector3(spawnPos.x,spawnPos.y + Random.Range(-3f,-1f)), spawnRot) as GameObject;
                 spawn.transform.SetParent(this.transform);
                 spawn.transform.localScale = new Vector3(spawn.transform.localScale.x + Random.Range(0f, 1.5f), spawn.transform.localScale.y, spawn.transform.localScale.z);
                 Spots = spawn.GetComponentsInChildren<Transform>();
