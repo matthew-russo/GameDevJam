@@ -21,4 +21,14 @@ public class SceneChange : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Return)) SceneManager.LoadScene("main");
     }
+
+    public void highScore()
+    {
+        SceneManager.LoadScene("Highscores");
+    }
+
+    public void endGame()
+    { 
+        SceneManager.LoadScene("End");
+    }
 }
